@@ -1,5 +1,68 @@
 # Projet Final - Deploiement Kubernetes d'une application Web
 
+## Execution rapide sur ma machine
+
+Docker Desktop doit etre lance et Kubernetes doit etre active.
+
+Ouvrir PowerShell dans le dossier du projet:
+
+```powershell
+cd "C:\Users\LEGION\Documents\Conteneurisation et Orchestration\projet de conteneurisation"
+```
+
+Construire les images locales:
+
+```powershell
+docker build -t ton-user-dockerhub/pf-backend:1.0 ./app/backend
+docker build -t ton-user-dockerhub/pf-frontend:1.0 ./app/frontend
+```
+
+Deployer dans Kubernetes:
+
+```powershell
+kubectl apply -f k8s/
+```
+
+Verifier que les pods et services sont actifs:
+
+```powershell
+kubectl get pods -n projet-final
+kubectl get svc -n projet-final
+```
+
+Ouvrir l'application:
+
+```text
+http://localhost:30080
+```
+
+Si Docker Desktop n'expose pas directement le NodePort, lancer ce port-forward
+et garder cette fenetre PowerShell ouverte:
+
+```powershell
+kubectl port-forward -n projet-final svc/frontend-service 30080:80
+```
+
+Puis ouvrir:
+
+```text
+http://localhost:30080
+```
+
+Tester les endpoints:
+
+```powershell
+curl.exe -i http://localhost:30080/api/health
+curl.exe -i http://localhost:30080/api/hello
+curl.exe -i http://localhost:30080/api/items
+```
+
+Arreter et supprimer le deploiement:
+
+```powershell
+kubectl delete -f k8s/
+```
+
 ## 1. Architecture
 
 ```
