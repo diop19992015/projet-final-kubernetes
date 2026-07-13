@@ -157,4 +157,7 @@ docker rmi ton-user-dockerhub/pf-frontend:health-ui-local
 Puis reconstruire uniquement les tags officiels:
 
 docker build -t ton-user-dockerhub/pf-backend:1.0 ./app/backend
+
+
 docker build -t ton-user-dockerhub/pf-frontend:1.0 ./app/frontend
+8. Les captures d'ecrans sont dans le dossier docs du projet.
