@@ -1,6 +1,7 @@
 const resultElement = document.getElementById('result');
 const helloButton = document.getElementById('hello-button');
 const itemsButton = document.getElementById('items-button');
+const healthButton = document.getElementById('health-button');
 
 async function loadJson(endpoint) {
   resultElement.textContent = 'Appel en cours...';
@@ -21,3 +22,4 @@ async function loadJson(endpoint) {
 
 helloButton.addEventListener('click', () => loadJson('hello'));
 itemsButton.addEventListener('click', () => loadJson('items'));
+healthButton.addEventListener('click', () => loadJson('health'));
