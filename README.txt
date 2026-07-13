@@ -94,3 +94,24 @@ Les probes Kubernetes utilisent /api/health sur le port 3000.
 7. Nettoyage
 
 kubectl delete -f k8s/
+
+8. Nettoyage des anciennes images locales
+
+Pour eviter que Docker Desktop ou Kubernetes reutilise une ancienne version,
+ne garder que ces deux images du projet:
+
+- ton-user-dockerhub/pf-backend:1.0
+- ton-user-dockerhub/pf-frontend:1.0
+
+Supprimer les anciens tags temporaires si presents:
+
+docker rmi ton-user-dockerhub/pf-backend:run-local
+docker rmi ton-user-dockerhub/pf-backend:health-ui-local
+docker rmi ton-user-dockerhub/pf-frontend:run-local
+docker rmi ton-user-dockerhub/pf-frontend:no-message-20260713-1209
+docker rmi ton-user-dockerhub/pf-frontend:health-ui-local
+
+Puis reconstruire uniquement les tags officiels:
+
+docker build -t ton-user-dockerhub/pf-backend:1.0 ./app/backend
+docker build -t ton-user-dockerhub/pf-frontend:1.0 ./app/frontend

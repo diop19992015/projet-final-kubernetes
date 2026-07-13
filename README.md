@@ -100,3 +100,30 @@ docs/capture-kubernetes-nodeport.png
   l'endpoint de health check utilise par les probes Kubernetes.
 - L'alias `/health` renvoie aussi `{ "status": "ok" }` pour une verification
   rapide du health check.
+
+## 7. Nettoyage des anciennes images locales
+
+Pour eviter que Docker Desktop ou Kubernetes reutilise une ancienne version,
+ne garder que ces deux images du projet:
+
+```text
+ton-user-dockerhub/pf-backend:1.0
+ton-user-dockerhub/pf-frontend:1.0
+```
+
+Supprimer les anciens tags temporaires si presents:
+
+```bash
+docker rmi ton-user-dockerhub/pf-backend:run-local
+docker rmi ton-user-dockerhub/pf-backend:health-ui-local
+docker rmi ton-user-dockerhub/pf-frontend:run-local
+docker rmi ton-user-dockerhub/pf-frontend:no-message-20260713-1209
+docker rmi ton-user-dockerhub/pf-frontend:health-ui-local
+```
+
+Puis reconstruire uniquement les tags officiels:
+
+```bash
+docker build -t ton-user-dockerhub/pf-backend:1.0 ./app/backend
+docker build -t ton-user-dockerhub/pf-frontend:1.0 ./app/frontend
+```
