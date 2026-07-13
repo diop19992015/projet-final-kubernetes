@@ -1,0 +1,16 @@
+node_modules/
+npm-debug.log
+
+*.log
+kubectl-port-forward.*.log
+
+.env
+.env.*
+
+tmp/
+.tmp/
+dist/
+build/
+
+.DS_Store
+Thumbs.db
